@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dettaglio Nota</title>
+
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../navbar/navbar.css" rel="stylesheet">
+  <link href="./view-note.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div id="navbar-placeholder"></div>
+
+  <div class="container py-4">
+    <div class="card shadow-sm">
+      <div class="card-header">
+        <h3 class="mb-0">Dettaglio Nota</h3>
+      </div>
+      <div class="card-body">
+        <!-- Titolo -->
+        <div class="mb-3">
+          <label for="titleInput" class="form-label">Titolo</label>
+          <input type="text" id="titleInput" class="form-control" disabled>
+        </div>
+        <!-- Descrizione -->
+        <div class="mb-3">
+          <label for="descriptionInput" class="form-label">Descrizione</label>
+          <textarea id="descriptionInput" class="form-control" rows="4" disabled></textarea>
+        </div>
+        <!-- Importante -->
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" type="checkbox" id="importantCheckbox" disabled>
+          <label class="form-check-label" for="importantCheckbox">Importante</label>
+        </div>
+        <!-- Colore Personalizzato -->
+        <div class="mb-3">
+          <label for="colorInput" class="form-label">Colore (Personalizzato)</label>
+          <input type="color" id="colorInput" class="form-control form-control-color" disabled>
+        </div>
+        <!-- Messaggio Personalizzato -->
+        <div class="mb-3">
+          <label for="messageInput" class="form-label">Messaggio Personalizzato</label>
+          <textarea id="messageInput" class="form-control" rows="2" disabled></textarea>
+        </div>
+        <!-- Allegati -->
+        <div class="mb-3">
+          <label class="form-label">Allegati</label>
+          <ul id="filesList" class="list-group">
+          </ul>
+        </div>
+        <div class="mb-3" id="fileInputGroup" hidden>
+          <label for="fileInput" class="form-label">Aggiungi Allegati</label>
+          <input type="file" id="fileInput" class="form-control" multiple>
+        </div>
+
+        <div class="text-end">
+          <button id="editBtn" class="btn btn-outline-primary">Modifica</button>
+          <button id="saveBtn" class="btn btn-primary d-none">Salva</button>
+          <button id="cancelBtn" class="btn btn-secondary d-none">Annulla</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../config.js"></script>
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../navbar/navbar.js"></script>
+  <script src="./view-note.js"></script>
+</body>
+</html>

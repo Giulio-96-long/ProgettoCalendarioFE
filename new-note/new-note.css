@@ -1,0 +1,23 @@
+body {
+  background-color: #f8f9fa;
+}
+
+.card-title {
+  font-size: 1.25rem;
+}
+
+#formResponse {
+  min-height: 1.25rem;
+}
+
+.form-control-color {
+  height: 2.5rem;
+  padding: .375rem .75rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .card {
+    margin: 0 1rem;
+  }
+}

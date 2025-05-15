@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Il mio Progetto – Benvenuto</title>  
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  </head>
+  <body class="d-flex flex-column justify-content-center align-items-center vh-100">
+    <div class="text-center">     
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Caricamento…</span>
+      </div>
+      <h1 class="h4 mt-3">Reindirizzamento al Login…</h1>
+      <p class="mt-2">Se non vieni reindirizzato, 
+        <a href="login/index.html">clicca qui</a>.
+      </p>
+    </div>   
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+       <script>
+      setTimeout(() => {
+        window.location.href = 'login/index.html';
+      }, 800);
+    </script>
+  </body>
+</html>

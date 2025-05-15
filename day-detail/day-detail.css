@@ -1,0 +1,31 @@
+body {
+  background-color: #f8f9fa;
+}
+
+#notesList .card {
+  height: 100%;
+}
+
+.card .card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  margin-bottom: .5rem;
+}
+
+.card-text {
+  flex-grow: 1;
+}
+
+.card .btn-group {
+  margin-top: 1rem;
+}
+
+@media (max-width: 576px) {
+  h1.h4 {
+    font-size: 1.25rem;
+  }
+}

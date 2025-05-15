@@ -1,0 +1,37 @@
+.navbar-dark .navbar-nav .nav-link {
+  color: #ffffff !important;
+  font-size: 1.1rem;   
+}
+
+.navbar-dark .navbar-brand {
+  color: #ffffff !important;
+  font-size: 1.25rem;    
+}
+
+.navbar {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.navbar {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  transition: background-color .2s ease, color .2s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  background-color: rgba(255,255,255,0.3);
+  color: #000 !important;   
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;     
+}
+
+.navbar-dark .navbar-nav .nav-link.hover-outline:hover {
+  background-color: transparent;
+  color: #fff !important;
+  border: 1px solid #fff;
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.7rem;
+}

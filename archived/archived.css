@@ -1,0 +1,27 @@
+body {
+  background-color: #f8f9fa;
+}
+
+h1 {
+  color: #343a40;
+}
+
+.table-responsive {
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+.table thead th {
+  font-weight: 600;
+}
+
+.btn-unarchive {
+  font-size: 0.85rem;
+}
+
+@media (max-width: 576px) {
+  .table-responsive {
+    font-size: 0.9rem;
+  }
+}

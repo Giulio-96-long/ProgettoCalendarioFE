@@ -1,0 +1,28 @@
+body {
+  background-color: #f8f9fa;
+}
+
+h1 {
+  color: #343a40;
+}
+
+.table-responsive {
+  margin-bottom: 1rem;
+}
+
+#resultsTable td {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 576px) {
+  #resultsTable th,
+  #resultsTable td {
+    font-size: 0.85rem;
+  }
+  form .form-label {
+    font-size: 0.9rem;
+  }
+}

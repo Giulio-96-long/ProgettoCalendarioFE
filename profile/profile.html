@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Profilo Utente</title>
+
+  <!-- Bootstrap CSS + Icons -->
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Navbar override -->
+  <link rel="stylesheet" href="../navbar/navbar.css">
+  <!-- Profile custom CSS -->
+  <link rel="stylesheet" href="./profile.css">
+</head>
+<body class="bg-light">
+
+  <!-- Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Contenuto -->
+  <div class="container my-5">
+
+    <!-- Card Profilo -->
+    <div class="card shadow-sm mb-5">
+      <div class="card-body">
+        <h2 class="card-title text-primary mb-4">
+          <i class="bi bi-person-circle me-2"></i>Il tuo Profilo
+        </h2>
+        <div class="row gy-4">
+          <!-- Foto + upload -->
+          <div class="col-12 col-md-4 text-center">
+            <img id="photo"
+                 class="img-thumbnail rounded-circle shadow-sm mb-3"
+                 style="width:160px;height:160px;object-fit:cover;"
+                 src=""
+                 alt="Foto profilo">
+            <label class="btn btn-outline-secondary btn-sm w-100">
+              <i class="bi bi-camera-fill me-1"></i> Carica Foto
+              <input type="file" id="photo-file" accept="image/*" hidden>
+            </label>
+            <div id="photo-msg" class="form-text mt-2"></div>
+          </div>
+          <!-- Dati utente -->
+          <div class="col-12 col-md-8">
+            <form id="profile-form">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="username-input" placeholder="Username" disabled>
+                <label for="username-input"><i class="bi bi-person-fill me-1"></i>Username</label>
+              </div>
+               <div class="form-floating mb-4">
+                <input type="text" class="form-control" id="lastname-input" placeholder="Cognome" disabled>
+                <label for="lastname-input"><i class="bi bi-card-text me-1"></i>Cognome</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="email-input" placeholder="Email" disabled>
+                <label for="email-input"><i class="bi bi-envelope-fill me-1"></i>Email</label>
+              </div>
+
+              <div class="d-grid d-md-flex gap-2">
+                <button type="button" id="btn-edit"   class="btn btn-primary flex-fill">
+                  <i class="bi bi-pencil-square me-1"></i>Modifica
+                </button>
+                <button type="button" id="btn-save"   class="btn btn-success flex-fill d-none">
+                  <i class="bi bi-save-fill me-1"></i>Salva
+                </button>
+                <button type="button" id="btn-cancel" class="btn btn-secondary flex-fill d-none">
+                  <i class="bi bi-x-circle-fill me-1"></i>Annulla
+                </button>
+                <button type="button" id="btn-delete" class="btn btn-danger flex-fill ms-md-auto">
+                  <i class="bi bi-trash-fill me-1"></i>Elimina
+                </button>
+              </div>
+              <div id="edit-msg" class="form-text mt-3 text-center"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card Cambia Password -->
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="card-title text-primary mb-4">
+          <i class="bi bi-lock-fill me-2"></i>Cambia Password
+        </h2>
+        <form id="password-form" class="mx-auto" style="max-width:400px;">
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="current-password-input" placeholder="Password Attuale">
+            <label for="current-password-input">Password Attuale</label>
+          </div>
+          <div class="form-floating mb-4">
+            <input type="password" class="form-control" id="new-password-input" placeholder="Nuova Password">
+            <label for="new-password-input">Nuova Password</label>
+          </div>
+          <button type="button" id="btn-change-password" class="btn btn-warning w-100">
+            <i class="bi bi-arrow-repeat me-1"></i>Cambia Password
+          </button>
+          <div id="pass-msg" class="form-text mt-3 text-center"></div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="../config.js"></script>
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../navbar/navbar.js"></script>
+  <script src="./profile.js"></script>
+</body>
+</html>

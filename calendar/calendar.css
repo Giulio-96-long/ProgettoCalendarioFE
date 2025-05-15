@@ -1,0 +1,138 @@
+/* Controlli mese/anno */
+.controls {
+  max-width: 1000px;
+  margin: 20px auto;
+  text-align: center;
+}
+.controls label,
+.controls select,
+.controls button {
+  margin: 0 5px;
+  font-size: 1rem;
+  padding: 5px;
+}
+#searchButton {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#searchButton:hover {
+  background-color: #125ea2;
+}
+/* Calendario */
+.calendar {
+  max-width: 1000px;
+  margin: 0 auto 20px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #e0e0e0;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-top: 1px solid #ccc;
+}
+.day-name,
+.day {
+  border: 1px solid #ccc;
+  min-height: 120px;
+  padding: 8px;
+}
+.day-name {
+  background: #f0f0f0;
+  text-align: center;
+  font-weight: bold;
+}
+.day {
+  display: flex;
+  flex-direction: column;
+}
+
+.note-title,
+.important-note,
+.detail-link {
+  position: static !important;
+  margin-top: 4px;  
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.day.other-month {
+  background: #fafafa;
+  color: #999;
+}
+.day-number {
+  font-weight: bold;
+}
+.note-count {
+  font-size: 0.8em;
+  color: #555;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background: #f1f1f1;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+.important-note {
+  font-size: 0.85em;
+  color: red;
+  font-weight: bold;
+  margin-top: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.detail-link {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.75em;
+    color: #1976d2;
+    text-decoration: underline;
+  }
+  .detail-link:hover {
+    color: #125ea2;
+  }
+
+  .note-title {
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    font-size: 0.85em;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } 
+  .note-title.important {
+    color: red;
+  }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .calendar-grid { grid-template-columns: repeat(2, 1fr); }
+  .calendar-header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  .day { min-height: 140px; }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .calendar-grid { grid-template-columns: repeat(4, 1fr); }
+}

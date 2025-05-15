@@ -1,0 +1,22 @@
+body {
+  background-color: #f0f2f5;
+}
+
+.card {
+  border: none;
+  border-radius: 0.75rem;
+}
+
+.card-title {
+  font-weight: 600;
+}
+
+.form-text {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 576px) {
+  .card-body {
+    padding: 1.5rem 1rem;
+  }
+}

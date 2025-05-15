@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calendario</title>
+
+  <!-- 1) Bootstrap CSS -->
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+  <!-- 2) Navbar override -->
+  <link href="../navbar/navbar.css" rel="stylesheet">
+  <!-- 3) Custom CSS -->
+  <link href="./calendar.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <!-- Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <div class="container my-4">
+    <!-- Filtri Mese/Anno -->
+    <form id="filterForm" class="row g-3 align-items-end mb-4">
+      <div class="col-12 col-md-4">
+        <label for="monthSelect" class="form-label">Mese</label>
+        <select id="monthSelect" class="form-select">
+          <option value="1">Gennaio</option>
+          <option value="2">Febbraio</option>
+          <option value="3">Marzo</option>
+          <option value="4">Aprile</option>
+          <option value="5">Maggio</option>
+          <option value="6">Giugno</option>
+          <option value="7">Luglio</option>
+          <option value="8">Agosto</option>
+          <option value="9">Settembre</option>
+          <option value="10">Ottobre</option>
+          <option value="11">Novembre</option>
+          <option value="12">Dicembre</option>
+        </select>
+      </div>
+      <div class="col-12 col-md-4">
+        <label for="yearSelect" class="form-label">Anno</label>
+        <select id="yearSelect" class="form-select">
+          <!-- Popolato da JS -->
+        </select>
+      </div>
+      <div class="col-12 col-md-4 d-grid">
+        <button id="searchButton" class="btn btn-primary">
+          Cerca
+        </button>
+      </div>
+    </form>
+
+    <!-- Calendario -->
+    <div class="card shadow-sm">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <button id="prevMonth" class="btn btn-outline-secondary btn-sm">◀</button>
+        <h5 class="mb-0" id="monthYear"></h5>
+        <button id="nextMonth" class="btn btn-outline-secondary btn-sm">▶</button>
+      </div>
+      <div class="card-body p-0">
+        <div class="row row-cols-7 g-1 text-center calendar-grid" id="calendarGrid">
+          <!-- Le celle verranno iniettate da JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../config.js"></script>
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../navbar/navbar.js"></script>
+  <script src="calendar.js"></script>
+</body>
+</html>

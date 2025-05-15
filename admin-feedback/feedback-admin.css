@@ -1,0 +1,24 @@
+/* Minimi override, tutto il resto lo fa Bootstrap */
+body {
+  font-family: system-ui, sans-serif;
+}
+
+.card-header h4 {
+  font-weight: 500;
+}
+
+.table-responsive {
+  margin-top: 1rem;
+}
+
+.btn-admin-detail {
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+}
+
+#admin-modal-body pre {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  white-space: pre-wrap;
+}

@@ -1,0 +1,22 @@
+body {
+  font-family: sans-serif;
+}
+
+.table-responsive {
+  box-shadow: 0 0 0.5rem rgba(0,0,0,0.1);
+  border-radius: 0.5rem;
+}
+
+.scrollable {
+  max-height: 200px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 576px) {
+  pre.scrollable {
+    max-height: 150px;
+  }
+}

@@ -1,0 +1,28 @@
+/* minimi override */
+body {
+  font-family: system-ui, sans-serif;
+}
+
+.card-header h4 {
+  font-weight: 500;
+}
+
+.form-text {
+  font-size: 0.9rem;
+}
+
+.table-responsive {
+  box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+  border-radius: 0.5rem;
+}
+
+.status-cell {
+  font-weight: 500;
+}
+
+.modal-body pre {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  white-space: pre-wrap;
+}

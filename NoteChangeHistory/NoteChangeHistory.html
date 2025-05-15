@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Storico Modifiche Note</title>
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../navbar/navbar.css">
+  <link rel="stylesheet" href="./NoteChangeHistory.css">
+</head>
+<body class="bg-light">
+
+  <div id="navbar-placeholder"></div>
+
+  <div class="container my-4">
+    <h1 class="mb-4 text-center">Storico Modifiche Note</h1>
+
+    <!-- Filter Form -->
+    <form id="filterForm" class="row g-3 mb-4">
+      <div class="col-sm-6 col-md-4 col-lg-2">
+        <label for="changeType" class="form-label">Tipo Modifica</label>
+        <input type="text" id="changeType" class="form-control" placeholder="Es. UPDATE">
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-2">
+        <label for="modifiedBy" class="form-label">Modificato Da</label>
+        <input type="text" id="modifiedBy" class="form-control" placeholder="Utente">
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-2">
+        <label for="startDate" class="form-label">Da Data</label>
+        <input type="date" id="startDate" class="form-control">
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-2">
+        <label for="endDate" class="form-label">A Data</label>
+        <input type="date" id="endDate" class="form-control">
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-2">
+        <label for="sortBy" class="form-label">Ordina Per</label>
+        <select id="sortBy" class="form-select">
+          <option value="modificationDate">Data</option>
+          <option value="changeType">Tipo</option>
+          <option value="modifiedBy">Utente</option>
+        </select>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-1">
+        <label for="order" class="form-label">Ordine</label>
+        <select id="order" class="form-select">
+          <option value="asc">Asc</option>
+          <option value="desc">Disc</option>
+        </select>
+      </div>
+      <div class="col-sm-6 col-md-4 col-lg-1">
+        <label for="pageSize" class="form-label">Pagina</label>
+        <input type="number" id="pageSize" class="form-control" value="10" min="1">
+      </div>
+      <div class="col-sm-12 col-md-4 col-lg-2 d-grid">
+        <button type="submit" class="btn btn-primary mt-4">
+          <i class="bi bi-search"></i> Cerca
+        </button>
+      </div>
+    </form>
+
+    <!-- Results Table -->
+    <div class="table-responsive shadow-sm rounded mb-3 bg-white">
+      <table id="resultsTable" class="table table-striped mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Tipo Modifica</th>
+            <th>Nota</th>
+            <th>Modificato da</th>
+            <th>Data Modifica</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Paginazione">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <button class="page-link" id="prevBtn">Precedente</button>
+        </li>
+        <li class="page-item disabled">
+          <span class="page-link" id="pageInfo">Pagina 1 di 1</span>
+        </li>
+        <li class="page-item">
+          <button class="page-link" id="nextBtn">Successiva</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <script src="../config.js"></script>
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../navbar/navbar.js"></script>
+  <script src="./NoteChangeHistory.js"></script>
+</body>
+</html>

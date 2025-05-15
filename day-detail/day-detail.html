@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dettaglio Note</title>
+
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../navbar/navbar.css" rel="stylesheet">
+  <link href="./day-detail.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div id="navbar-placeholder"></div>
+
+  <div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h1 class="h4 mb-0">Note del <span id="detailDate"></span></h1>   
+      <button id="newNoteBtn" class="btn btn-primary">
+        ➕ Nuova Nota
+      </button>
+    </div>
+
+    <!-- Grid di note -->
+    <div class="row g-3" id="notesList">
+      <!-- Le card verranno iniettate da JS -->
+    </div>
+  </div>
+
+  <div class="modal fade" id="noteModal" tabindex="-1" aria-labelledby="noteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="noteForm" class="p-3">
+          <div class="modal-header">
+            <h5 class="modal-title" id="noteModalLabel">Nuova Nota</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="title" class="form-label">Titolo</label>
+              <input type="text" id="title" class="form-control" placeholder="Titolo" required>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Descrizione</label>
+              <textarea id="description" class="form-control" rows="4" placeholder="Descrizione"></textarea>
+            </div>
+            <div class="form-check mb-0">
+              <input type="checkbox" id="isImportant" class="form-check-input">
+              <label for="isImportant" class="form-check-label">Importante</label>
+            </div>
+            <div id="formResponse" class="form-text text-center mt-2"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+            <button type="submit" class="btn btn-primary">Salva</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="../config.js"></script>
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../navbar/navbar.js"></script>
+  <script src="./day-detail.js"></script>
+</body>
+</html>
