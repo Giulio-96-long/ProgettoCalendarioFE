@@ -1,103 +1,93 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Se arrivo da OAuth2 con ?token=…
+  const params = new URLSearchParams(window.location.search);
+  const token  = params.get('token');
+  if (token) {
+    localStorage.setItem('jwtToken', token);    
+    history.replaceState({}, document.title, window.location.pathname);
+    window.location.href = '../calendar/calendar.html';
+  }
 
-  // Signup
+  // Gestione REGISTER
   const signupForm = document.getElementById('signupForm');
   if (signupForm) {
-    signupForm.addEventListener('submit', function(event) {
-      event.preventDefault(); 
-
+    signupForm.addEventListener('submit', event => {
+      event.preventDefault();
       const username = document.getElementById('username').value.trim();
+      const lastname = document.getElementById('lastname').value.trim();
       const email    = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
-      const lastname = document.getElementById('lastname').value.trim();
-
-      // VALIDAZIONI FRONT-END
       if (!username || !lastname || !email || !password) {
         alert('Tutti i campi sono obbligatori.');
         return;
       }
-
       if (!/^\S+@\S+\.\S+$/.test(email)) {
         alert('Inserisci un indirizzo email valido.');
         return;
       }
-
       if (password.length < 6 || password.length > 20) {
         alert('La password deve avere tra 6 e 20 caratteri.');
         return;
       }
-
       registerUser(username, email, password, lastname);
     });
   }
 
-  // Login
+  // Gestione LOGIN
   const loginForm = document.getElementById('loginForm');
   if (loginForm) {
-    loginForm.addEventListener('submit', function(event) {
-      event.preventDefault();  
-
+    loginForm.addEventListener('submit', event => {
+      event.preventDefault();
       const loginEmail    = document.getElementById('loginEmail').value.trim();
       const loginPassword = document.getElementById('loginPassword').value;
-
-      // VALIDAZIONI FRONT-END
       if (!loginEmail || !loginPassword) {
-        alert('Email e password sono obbligatorie per il login.');
+        alert('Email e password sono obbligatorie.');
         return;
       }
-
       if (!/^\S+@\S+\.\S+$/.test(loginEmail)) {
         alert('Inserisci un indirizzo email valido.');
         return;
       }
-
       loginUser(loginEmail, loginPassword);
     });
   }
 });
 
 function registerUser(username, email, password, lastname) {
-  const data = { username, email, password, lastname };
-
   fetch(`${BASE_URL}/api/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
+    body: JSON.stringify({ username, email, password, lastname })
   })
-  .then(response => {
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return response.json();
+  .then(res => {
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
   })
-  .then(data => {
-    console.log('Registrazione riuscita:', data);   
-    window.location.href = '/login/index.html';
+  .then(() => {
+    alert('Registrazione riuscita – effettua ora il login');
+    // passa alla tab Login
+    document.querySelector('#login-tab').click();
   })
-  .catch(error => {
-    console.error('Errore registrazione:', error);
+  .catch(() => {
     alert('Registrazione fallita. Riprova più tardi.');
   });
 }
 
 function loginUser(email, password) {
-  const data = { email, password };
-
   fetch(`${BASE_URL}/api/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
+    body: JSON.stringify({ email, password })
   })
-  .then(response => {
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    return response.json();
+  .then(res => {
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
   })
   .then(data => {
-    console.log('Login riuscito:', data);    
-    localStorage.setItem('jwtToken', data.token);  
+    localStorage.setItem('jwtToken', data.token);
     window.location.href = '../calendar/calendar.html';
   })
-  .catch(error => {
-    console.error('Errore login:', error);
-    alert('Login fallito. Controlla credenziali.');
+  .catch(() => {
+    alert('Login fallito. Controlla le credenziali.');
   });
 }
-

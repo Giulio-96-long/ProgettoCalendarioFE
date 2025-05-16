@@ -1,47 +1,78 @@
 <!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>Signup / Login</title>
-  <link rel="stylesheet" href="./login.css">
-</head>
-<body>
+<html lang="it">
 
-<!DOCTYPE html>
-<html>
 <head>
-	
-</head>
-<body>
-	<div class="main">  	
-		<input type="checkbox" id="chk" aria-hidden="true">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Signup / Login</title>
 
-			 <!-- Form di registrazione -->
-			 <div class="signup">
-				<form id="signupForm">
-				  <label for="chk" aria-hidden="true">Sign up</label>
-				  <input type="text" id="username" name="txt" placeholder="Nome" required="">
-				  <input type="text" id="lastname" name="txt" placeholder="Cognome" required="">
-				  <input type="email" id="email" name="email" placeholder="Email" required="">
-				  <input type="password" id="password" name="pswd" placeholder="Password" required="">
-				  <button type="submit">Sign up</button>
-				</form>
-			  </div>
-		  
-			  <!-- Form di login -->
-			  <div class="login">
-				<form id="loginForm">
-				  <label for="chk" aria-hidden="true">Login</label>
-				  <input type="email" id="loginEmail" name="email" placeholder="Email" required="">
-				  <input type="password" id="loginPassword" name="pswd" placeholder="Password" required="">
-				  <button type="submit">Login</button>
-				</form>
-			  </div>
-			</div>
-	</div>
+	<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+	<link href="./login.css" rel="stylesheet">
+</head>
+
+<body>
+ <div class="auth-card">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" id="authTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button">Login</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button">Register</button>
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- LOGIN -->
+      <div class="tab-pane fade show active" id="login" role="tabpanel">
+        <form id="loginForm">
+          <div class="mb-3">
+            <label for="loginEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="loginEmail" placeholder="Email" required>
+          </div>
+          <div class="mb-3">
+            <label for="loginPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
+          </div>
+          <button class="btn btn-primary w-100 mb-2" type="submit">Login</button>
+        </form>
+        <div class="text-center mb-3">oppure</div>
+        <a href="http://localhost:8080/oauth2/authorization/google" class="btn btn-outline-danger w-100">
+          <i class="bi bi-google me-2"></i>Login con Google
+        </a>
+      </div>
+
+      <!-- REGISTER -->
+      <div class="tab-pane fade" id="register" role="tabpanel">
+        <form id="signupForm">
+          <div class="mb-3">
+            <label for="username" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="username" placeholder="Nome" required>
+          </div>
+          <div class="mb-3">
+            <label for="lastname" class="form-label">Cognome</label>
+            <input type="text" class="form-control" id="lastname" placeholder="Cognome" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Email" required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" required>
+          </div>
+          <button class="btn btn-success w-100" type="submit">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+	<script src="../assets/js/bootstrap.bundle.min.js"></script>
+	<script src="../config.js"></script>
+	<script src="login.js"></script>
 </body>
-</html>
-<script src="../config.js"></script>
-<script src="login.js"></script>
-</body>
+
 </html>

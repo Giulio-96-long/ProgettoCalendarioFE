@@ -13,7 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const colIn = document.getElementById('colorInput');
   const msgIn = document.getElementById('messageInput');
   const filesUl = document.getElementById('filesList');
+
+  const editBtn = document.getElementById('editBtn');
   const saveBtn = document.getElementById('saveBtn');
+  const cancelBtn = document.getElementById('cancelBtn');
+  const fileInputGroup = document.getElementById('fileInputGroup');
+  const fileInput = document.getElementById('fileInput');
 
   let original = {};
 
@@ -48,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
           </li>
         `).join('');
 
-        // AGGIUNGI QUESTO SUBITO DOPO
         document.querySelectorAll('.btn-file-download').forEach(btn => {
           btn.addEventListener('click', async () => {
             const fileId = btn.dataset.id;
@@ -112,17 +116,14 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .catch(err => alert(err.message));
   }
-
-  const editBtn = document.getElementById('editBtn');
-  const cancelBtn = document.getElementById('cancelBtn');
-
   function setEditMode(on) {
     [titleIn, descIn, impCb, colIn, msgIn].forEach(el => el.disabled = !on);
-    editBtn.hidden = on;
-    saveBtn.hidden = !on;
-    cancelBtn.hidden = !on;
-    fileInputGroup.hidden = !on;
     fileInput.disabled = !on;
+    // toggle class d-none su bottoni e gruppo file input
+    editBtn.classList.toggle('d-none', on);
+    saveBtn.classList.toggle('d-none', !on);
+    cancelBtn.classList.toggle('d-none', !on);
+    fileInputGroup.classList.toggle('d-none', !on);
   }
 
   editBtn.addEventListener('click', () => setEditMode(true));
@@ -184,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
       formData.append('files', f);
     }
 
-    fetch(`${BASE_URL}}/api/note/update`, {
+    fetch(`${BASE_URL}/api/note/update`, {
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${token}`

@@ -123,6 +123,34 @@
     color: red;
   }
 
+  .day {
+  position: relative;
+}
+
+.important-label {
+  position: absolute;
+  top: 2px;
+  right: 12px;
+  background: red;
+  color: #fff;
+  border-radius: 2px;
+  padding: 0 4px;
+  font-size: 0.6rem;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+/* il puntino rosso in alto a destra */
+.important-dot {
+  width: 8px;
+  height: 8px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .calendar-grid { grid-template-columns: repeat(2, 1fr); }

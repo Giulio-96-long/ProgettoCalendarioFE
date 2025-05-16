@@ -1,6 +1,11 @@
 (async function() {
 
-  // DOM
+  const monthNames = [
+  "Gennaio", "Febbraio", "Marzo", "Aprile",
+  "Maggio", "Giugno", "Luglio", "Agosto",
+  "Settembre", "Ottobre", "Novembre", "Dicembre"
+];
+
   const monthSelect  = document.getElementById('monthSelect');
   const yearSelect   = document.getElementById('yearSelect');
   const prevBtn      = document.getElementById('prevMonth');
@@ -15,7 +20,7 @@
   let month = today.getMonth() + 1; // 1–12
 
   // Popola anni e setta correnti
-  for (let y = year - 5; y <= year + 5; y++) {
+  for (let y = year - 4; y <= year + 6; y++) {
     yearSelect.add(new Option(y, y));
   }
   monthSelect.value = month;
@@ -54,7 +59,8 @@
 
   function renderCalendar() {
     calendarGrid.innerHTML = '';
-    monthYear.textContent = `${month}/${year}`;
+
+    monthYear.textContent = `${monthNames[month - 1]} ${year}`;
 
     // intestazione giorni
     ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'].forEach(dn => {
@@ -117,7 +123,7 @@
   function populateMonthNotes(events) {
     // ripulisci eventuali vecchi titoli/badge
     calendarGrid
-      .querySelectorAll('.note-count, .note-title')
+      .querySelectorAll('.note-count, .note-title, .important-dot')
       .forEach(el => el.remove());
 
     events.forEach(ev => {
@@ -133,18 +139,23 @@
       // memorizzo l'id per il click
       cell.dataset.idDataNote = ev.idDataNote;
 
+      if (ev.notes.some(n => n.important)) {
+        const lbl = document.createElement('div');
+        lbl.className = 'important-label';
+        lbl.textContent = 'IMP';
+        cell.appendChild(lbl);
+      }
+
       // disegno tutti i titoli
       ev.notes.forEach(n => {
         const td = document.createElement('div');
         td.className = 'note-title';
-        td.textContent = n.title;
-      
-        // forzo il colore inline a prevalere sul CSS
+        td.textContent = n.title;      
+    
         if (n.color) {
           td.style.setProperty('color', n.color, 'important');
-        } else if (n.important) {
-          td.style.setProperty('color', 'red', 'important');
-        }      
+        }         
+              
         cell.appendChild(td);
       });
 
