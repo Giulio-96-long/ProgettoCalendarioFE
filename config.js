@@ -1,10 +1,12 @@
 // config.js
-const BASE_URL = 'http://localhost:8080';
-const token    = localStorage.getItem('jwtToken');
-const path     = window.location.pathname;
+const BASE_URL = 'http://localhost:8080';          
+const LOGIN_URL = `${BASE_URL}/login/index.html`;
 
-const onAuthPage = path.startsWith('/login') || path.startsWith('/register');
+const PUBLIC_PATHS = ['/login', '/register', '/error'];  
+const { pathname } = window.location;
+const isPublic = PUBLIC_PATHS.some(p => pathname.startsWith(p));
 
-if (!token && !onAuthPage) {
-  window.location.replace('/login/index.html');
+const token = localStorage.getItem('jwtToken');
+if (!token && !isPublic) {
+  window.location.replace(LOGIN_URL);
 }

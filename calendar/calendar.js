@@ -166,4 +166,20 @@
       cell.appendChild(b);
     });
   }
+
+  const backToTop = document.getElementById('backToTop');
+
+		// Mostra il bottone dopo aver scrollato di 200px
+		window.addEventListener('scroll', () => {
+			if (window.pageYOffset > 200) {
+				backToTop.style.display = 'block';
+			} else {
+				backToTop.style.display = 'none';
+			}
+		});
+
+		// Scroll dolce verso l'alto al click
+		backToTop.addEventListener('click', () => {
+			window.scrollTo({top: 0, behavior: 'smooth'});
+		});
 })();

@@ -20,7 +20,39 @@ document.addEventListener('DOMContentLoaded', () => {
   const fileInputGroup = document.getElementById('fileInputGroup');
   const fileInput = document.getElementById('fileInput');
 
+  const pendingFilesList   = document.getElementById('pendingFilesList');
+
+  let pendingFiles = [];
   let original = {};
+
+  fileInput.addEventListener('change', () => {
+    Array.from(fileInput.files).forEach(f => {
+      pendingFiles.push(f);
+    });
+    fileInput.value = '';
+    renderPendingFiles();
+  });
+
+  function renderPendingFiles() {
+    pendingFilesList.innerHTML = pendingFiles.map((f, idx) => `
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span>${f.name}</span>
+        <button type="button" class="btn btn-sm btn-outline-danger" data-idx="${idx}">
+          🗑️
+        </button>
+      </li>
+    `).join('');
+
+    // collega gli handler per rimuovere
+    pendingFilesList.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = +btn.dataset.idx;
+        pendingFiles.splice(idx,1);
+        renderPendingFiles();
+      });
+    });
+  }
+
 
   function loadNote() {
     fetch(`${BASE_URL}/api/note/getById/${noteId}`, {
@@ -184,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let f of fileInput.files) {
       formData.append('files', f);
     }
-
+    pendingFiles.forEach(f => formData.append('files', f));
     fetch(`${BASE_URL}/api/note/update`, {
       method: 'PUT',
       headers: {

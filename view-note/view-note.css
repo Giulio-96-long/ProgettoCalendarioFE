@@ -19,6 +19,14 @@ body {
   color: #dc3545;
 }
 
+#filesList {
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  list-style: none;
+}
+
 /* Spazio tra lista e pulsanti */
 .list-group-item {
   padding-right: 3rem;
