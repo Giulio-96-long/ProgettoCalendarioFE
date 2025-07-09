@@ -3,6 +3,10 @@
   font-size: 1.1rem;   
 }
 
+body {
+   font-family:' Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .navbar-dark .navbar-brand {
   color: #ffffff !important;
   font-size: 1.25rem;    

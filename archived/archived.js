@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const yearSelect  = document.getElementById('yearSelect');
   const searchBtn   = document.getElementById('searchButton');
   const tableBody   = document.getElementById('tableBody');
+  const resetBtn    = document.getElementById('resetButton'); 
 
   // Popola anni (ultimi 5 + prossimo)
   const now         = new Date();
@@ -53,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
         </tr>`;
     });
   }
+
 
  function renderTable(groups) {
   var rows = [];
@@ -112,6 +114,12 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Impossibile ripristinare la nota: ' + err.message);
       });
     });
+  });
+
+   resetBtn.addEventListener('click', function() { 
+    monthSelect.value = '0';           
+    yearSelect.value  = currentYear;  
+    fetchAndRender();                
   });
 }
 

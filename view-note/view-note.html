@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,6 +10,7 @@
   <link href="../navbar/navbar.css" rel="stylesheet">
   <link href="./view-note.css" rel="stylesheet">
 </head>
+
 <body class="bg-light">
 
   <div id="navbar-placeholder"></div>
@@ -44,6 +46,18 @@
           <label for="messageInput" class="form-label">Messaggio Personalizzato</label>
           <textarea id="messageInput" class="form-control" rows="2" disabled></textarea>
         </div>
+
+        <div id="shareSearchGroup" class="mb-3 d-none">
+          <label for="shareSearch" class="form-label">Condividi con</label>
+          <input type="text" id="shareSearch" class="form-control" placeholder="Cerca utente per email…">
+          <ul id="shareSearchResults" class="list-group position-absolute w-100" style="z-index:1000;"></ul>
+        </div>
+
+        <div class="mb-3">
+          <strong id="sharedLabel"></strong>
+          <ul id="currentSharedList" class="list-group mt-2"></ul>
+        </div>
+
         <!-- Allegati -->
         <div class="mb-3">
           <label class="form-label">Allegati</label>
@@ -51,8 +65,8 @@
           </ul>
         </div>
         <div class="mb-3" id="fileInputGroup">
-          <label for="fileInput" class="form-label">Aggiungi Allegati</label>        
-          <input type="file" id="fileInput" class="form-control" multiple disabled>  
+          <label for="fileInput" class="form-label">Aggiungi Allegati</label>
+          <input type="file" id="fileInput" class="form-control" multiple disabled>
           <ul id="pendingFilesList" class="list-group mt-2"></ul>
         </div>
 
@@ -63,6 +77,13 @@
         </div>
       </div>
     </div>
+    <div>
+      <button id="backBtn" class="btn btn-outline-primary">
+        Torna alle note del giorno
+      </button>
+    </div>
+
+
   </div>
 
   <script src="../config.js"></script>
@@ -70,4 +91,5 @@
   <script src="../navbar/navbar.js"></script>
   <script src="./view-note.js"></script>
 </body>
+
 </html>

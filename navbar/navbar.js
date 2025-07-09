@@ -28,11 +28,12 @@ document.addEventListener('DOMContentLoaded', function () {
   fetch(`${BASE_URL}/api/user/profile`, {
     headers: { 'Authorization': `Bearer ${token}` }
   })
-    .then(res => {
+    .then(res => {     
       if (!res.ok) throw new Error('not-auth');
       return res.json();
     })
     .then(me => {
+      window.profile = me;
       const isAdmin = me.role === 'ADMIN' || me.role === 'ROLE_ADMIN';
 
       // Link statici
@@ -90,24 +91,24 @@ document.addEventListener('DOMContentLoaded', function () {
         leftUl.appendChild(li);
       }
 
-      // Utente + ruolo
       const liUser = document.createElement('li');
       liUser.className = 'nav-item d-flex align-items-center';
       liUser.innerHTML = `
-      <span class="nav-link text-white disabled">
-        ${me.username} (${me.role})
-      </span>`;
+        <span class="nav-link text-white disabled">
+          ${me.username} (${me.role})
+        </span>`;
       rightUl.appendChild(liUser);
 
       // Bottone logout
       const liLogout = document.createElement('li');
-      liLogout.className = 'nav-item';
+      liLogout.className = 'nav-item d-flex align-items-center ms-3';
       liLogout.innerHTML = `
-      <a id="logoutBtn" href="/login/index.html"
-        class="btn btn-outline-light btn-sm">
-        Logout
-      </a>`;
+        <a id="logoutBtn" href="/login/index.html"
+          class="btn btn-outline-light btn-sm">
+          Logout
+        </a>`;
       rightUl.appendChild(liLogout);
+
 
       document.getElementById('logoutBtn')
         .addEventListener('click', function (e) {

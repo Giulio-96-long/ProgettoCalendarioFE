@@ -14,11 +14,17 @@
   <!-- Navbar -->
   <div id="navbar-placeholder"></div>
 
-  <div class="container my-4">
+  <div class="container my-4 border">
+
+    <div class="row bg-primary d-flex justify-content-start ">
+      <h1 class="mb-4 text-light">Calendario</h1>
+    </div>
+
+
     <!-- Filtri Mese/Anno -->
     <form id="filterForm" class="row g-3 align-items-end mb-4">
       <div class="col-12 col-md-4">
-        <label for="monthSelect" class="form-label">Mese</label>
+       <h4 for="monthSelect" class="form-label p-1" style=" border-top: 5px;">Mese</h4>
         <select id="monthSelect" class="form-select">
           <option value="1">Gennaio</option>
           <option value="2">Febbraio</option>
@@ -35,7 +41,7 @@
         </select>
       </div>
       <div class="col-12 col-md-4">
-        <label for="yearSelect" class="form-label">Anno</label>
+        <h4 for="yearSelect" class="form-label">Anno</h4>
         <select id="yearSelect" class="form-select">
           <!-- Popolato da JS -->
         </select>

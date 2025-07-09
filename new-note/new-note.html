@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nuova Nota</title>
 
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="../navbar/navbar.css" rel="stylesheet">
   <link href="./new-note.css" rel="stylesheet">
 </head>
+
 <body class="bg-light">
 
   <div id="navbar-placeholder"></div>
@@ -25,7 +27,8 @@
 
           <div class="mb-3">
             <label for="description" class="form-label">Descrizione</label>
-            <textarea class="form-control" id="description" name="description" rows="3" placeholder="Descrizione"></textarea>
+            <textarea class="form-control" id="description" name="description" rows="3"
+              placeholder="Descrizione"></textarea>
           </div>
 
           <div class="form-check form-switch mb-3">
@@ -35,7 +38,8 @@
 
           <div class="mb-3">
             <label for="color" class="form-label">Colore (opzionale)</label>
-            <input type="color" class="form-control form-control-color" id="color" name="color" title="Scegli un colore">
+            <input type="color" class="form-control form-control-color" id="color" name="color"
+              title="Scegli un colore">
           </div>
 
           <div class="mb-3">
@@ -46,6 +50,25 @@
           <div class="mb-4">
             <label for="files" class="form-label">Allega file (opzionale)</label>
             <input class="form-control" type="file" id="files" name="files" multiple>
+            <ul id="fileList" class="list-group mt-2"></ul>
+          </div>
+
+          <!-- bottone per mostrare/nascondere shareSection -->
+          <button type="button" id="btnLoadUsers" class="btn btn-outline-secondary mb-3">
+            Condividi con…
+          </button>
+
+          <div id="shareSection" class="mb-3 d-none">
+            <label class="form-label">Condividi con:</label>
+
+            <!-- input per la ricerca -->
+            <input type="text" id="shareSearch" class="form-control mb-2" placeholder="Digita email o username…" />
+
+            <!-- qui compariranno i risultati della ricerca -->
+            <ul id="shareSearchResults" class="list-group mb-2"></ul>
+
+            <!-- qui comparirà la lista degli utenti selezionati -->
+            <ul id="usersList" class="list-group"></ul>
           </div>
 
           <div class="d-grid">
@@ -65,4 +88,5 @@
   <script src="../navbar/navbar.js"></script>
   <script src="new-note.js"></script>
 </body>
+
 </html>

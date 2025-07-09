@@ -1,13 +1,33 @@
 let currentPage = 0;
-let totalPages  = 0;
+let totalPages = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('filterForm')
-    .addEventListener('submit', e => {
-      e.preventDefault();
-      currentPage = 0;
-      fetchData();
-    });
+
+  const form = document.getElementById('filterForm');
+  const resetBtn = document.getElementById('resetButton');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    currentPage = 0;
+    fetchData();
+  });
+
+  resetBtn.addEventListener('click', () => {
+    // 1) Ripristina campi ai valori di default
+    document.getElementById('changeType').value = '';
+    document.getElementById('modifiedBy').value = '';
+    document.getElementById('startDate').value = '';
+    document.getElementById('endDate').value = '';
+    document.getElementById('sortBy').value = 'modificationDate';
+    document.getElementById('order').value = 'asc';
+    document.getElementById('pageSize').value = '10';
+
+    // 2) Torna alla prima pagina
+    currentPage = 0;
+
+    // 3) Ricarica i dati
+    fetchData();
+  });
 
   document.getElementById('prevBtn')
     .addEventListener('click', () => {
@@ -32,35 +52,35 @@ function fetchData() {
   const payload = {
     changeType: document.getElementById('changeType').value.trim() || null,
     modifiedBy: document.getElementById('modifiedBy').value.trim() || null,
-    startDate:  buildDateTime('startDate', 'T00:00:00'),
-    endDate:    buildDateTime('endDate',   'T23:59:59'),
+    startDate: buildDateTime('startDate', 'T00:00:00'),
+    endDate: buildDateTime('endDate', 'T23:59:59'),
     page: currentPage,
     size: parseInt(document.getElementById('pageSize').value, 10) || 10,
     sortBy: document.getElementById('sortBy').value,
-    order:  document.getElementById('order').value
+    order: document.getElementById('order').value
   };
 
   fetch(`${BASE_URL}/api/noteChangeHistory/search`, {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${token}`,
-      'Content-Type':  'application/json'
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(payload)
   })
-  .then(res => {
-    if (!res.ok) {
-      window.location.href = '../error/error.html';
-      throw new Error('Redirect to error page');
-    }
-    return res.json();
-  })
-  .then(data => {
-    totalPages = data.totalPages;
-    updateTable(data.content);
-    updatePagination();
-  })
-  .catch(err => console.error('Errore nel fetch:', err));
+    .then(res => {
+      if (!res.ok) {
+        window.location.href = '../error/error.html';
+        throw new Error('Redirect to error page');
+      }
+      return res.json();
+    })
+    .then(data => {
+      totalPages = data.totalPages;
+      updateTable(data.content);
+      updatePagination();
+    })
+    .catch(err => console.error('Errore nel fetch:', err));
 }
 
 function buildDateTime(id, suffix) {
@@ -77,16 +97,18 @@ function updateTable(rows) {
   tbody.innerHTML = rows.map(r => `
     <tr>
       <td>${r.changeType || '--'}</td>
-      <td>${r.note       || '--'}</td>
+      <td>${r.note || '--'}</td>
       <td>${r.modifiedBy || '--'}</td>
-      <td>${new Date(r.modificationDate).toLocaleString()}</td>
+      <td>${new Date(r.modificationDate).toLocaleString()}</td>     
     </tr>
   `).join('');
+
 }
+
 
 function updatePagination() {
   document.getElementById('pageInfo').textContent =
-    `Pagina ${currentPage+1} di ${totalPages}`;
-  document.getElementById('prevBtn').disabled = currentPage<=0;
-  document.getElementById('nextBtn').disabled = currentPage>=totalPages-1;
+    `Pagina ${currentPage + 1} di ${totalPages}`;
+  document.getElementById('prevBtn').disabled = currentPage <= 0;
+  document.getElementById('nextBtn').disabled = currentPage >= totalPages - 1;
 }

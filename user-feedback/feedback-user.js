@@ -95,8 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         : (!f.reply.read ? 'Nuova risposta' : 'Letto');
 
       return `
-      <tr>
-        <td>${f.id}</td>
+      <tr>       
         <td>${f.subject}</td>
         <td>${new Date(f.createdAt).toLocaleString()}</td>
         <td class="status-cell">${stato}</td>
