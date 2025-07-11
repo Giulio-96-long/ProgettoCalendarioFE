@@ -1,35 +1,39 @@
+<!-- /error/error.html -->
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Pagina di Errore</title>
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Errore</title>
+
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="error.css">
+  <base href="../">
 </head>
-<body class="d-flex align-items-center vh-100 bg-light">
-  <div class="container text-center">
-    <div class="card shadow-sm mx-auto" style="max-width: 500px;">
-      <div class="card-body">
-        <h1 class="text-danger mb-3">
-          <i class="bi bi-exclamation-triangle-fill"></i>
-          Ops!
-        </h1>
-        <!-- qui mostriamo il codice di errore -->
-        <p class="fw-bold" id="errorCode">Errore</p>
-        <!-- qui il messaggio -->
-        <p class="lead" id="errorMessage">
-          Si è verificato un errore imprevisto.<br>
-          Riprova più tardi o contatta l’assistenza.
-        </p>
-        <a href="../login/index.html" class="btn btn-primary mt-3">
+<body class="d-flex align-items-center justify-content-center bg-light vh-100">
+  <div class="card shadow-sm text-center" style="max-width:500px; width:90%;">
+    <div class="card-body">
+      <h1 id="errorTitle" class="text-danger mb-3">⚠️ Ops!</h1>
+      <p id="errorCode" class="fw-bold fs-4">Errore</p>
+      <p id="errorMessage" class="lead">
+        Si è verificato un errore imprevisto.<br>
+        Riprova più tardi o contatta l’assistenza.
+      </p>
+
+      <div id="errorActions" class="mt-4">
+        <a id="loginBtn" href="../login/index.html" class="btn btn-primary me-2">
           Torna al login
         </a>
+        <a id="calendarBtn" href="../calendar/calendar.html" class="btn btn-secondary">
+          Torna al calendario
+        </a>
       </div>
+
+      <pre id="errorStack" class="d-none"></pre>
     </div>
   </div>
-  <script src="../config.js"></script>
+
+  <script src="config.js"></script>
+  <script src="error.js"></script>
 </body>
 </html>
-

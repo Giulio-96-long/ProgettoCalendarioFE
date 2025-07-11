@@ -3,6 +3,19 @@ body {
   padding: 0;
 }
 
+html, body {
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+}
+.card {
+  max-width: 500px;
+  width: 90%;
+  margin: auto;
+}
+
 @media (max-width: 576px) {
   .card {
     margin: 1rem;
@@ -12,4 +25,12 @@ body {
 #errorStack {
   font-family: Menlo, Consolas, monospace;
   font-size: 0.85rem;
+  text-align: left;
+  white-space: pre-wrap;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  border-radius: 0.25rem;
+  overflow-x: auto;
 }

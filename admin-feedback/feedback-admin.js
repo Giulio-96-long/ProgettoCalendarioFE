@@ -185,3 +185,12 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 }
 });
+
+const modalElement = document.getElementById('adminModal');
+  if (modalElement) {
+    modalElement.addEventListener('hidden.bs.modal', () => {
+      if (document.activeElement && modalElement.contains(document.activeElement)) {
+        document.activeElement.blur();
+      }
+    });
+  }
