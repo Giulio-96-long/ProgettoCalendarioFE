@@ -140,6 +140,11 @@
   line-height: 1.2;
 }
 
+#yearSelect {  
+  overflow-y: auto;    
+  display: block;         
+}
+
 /* il puntino rosso in alto a destra */
 .important-dot {
   width: 8px;

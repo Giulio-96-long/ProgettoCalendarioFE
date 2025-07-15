@@ -24,49 +24,52 @@ const token = localStorage.getItem('jwtToken');
 ;(function() {
   const _fetch = window.fetch.bind(window);
 
-  window.fetch = async function(input, init = {}) {
-    let res;
+ window.fetch = async function(input, init = {}) {
+  let res;
+  try {
+    res = await _fetch(input, init);
+  } catch (err) {
+    console.error('Fetch error:', err);
+    window.location.replace(
+      `${ERROR_PAGE}?code=NETWORK_ERROR&message=${encodeURIComponent('Errore di rete.')}`
+    );
+    return Promise.reject(err);
+  }
+
+  const isLoginRequest = typeof input === 'string' && input.includes('/auth/login');
+
+  if ((res.status === 401 || res.status === 403) && !isLoginRequest) {
+    const code    = res.status === 401 ? 'UNAUTHENTICATED' : 'FORBIDDEN';
+    const message = res.status === 401
+      ? 'Sessione scaduta. Effettua nuovamente il login.'
+      : 'Non hai i permessi per questa operazione.';
+    window.location.replace(
+      `${ERROR_PAGE}?code=${code}&message=${encodeURIComponent(message)}`
+    );
+    return Promise.reject({ code, message });
+  }
+
+  if (res.status >= 400) {
+    let payload, code, message;
     try {
-      res = await _fetch(input, init);
-    } catch (err) {
-      // network error
-      console.error('Fetch error:', err);
-      window.location.replace(
-        `${ERROR_PAGE}?code=NETWORK_ERROR&message=${encodeURIComponent('Errore di rete.')}`
-      );
-      return Promise.reject(err);
+      payload = await res.clone().json();
+      code    = payload.code    || res.status;
+      message = payload.message || res.statusText;
+    } catch {
+      code    = res.status;
+      message = res.statusText;
     }
 
-    // 401 / 403 → redirect
-    if (res.status === 401 || res.status === 403) {
-      const code    = res.status === 401 ? 'UNAUTHENTICATED' : 'FORBIDDEN';
-      const message = res.status === 401
-        ? 'Sessione scaduta. Effettua nuovamente il login.'
-        : 'Non hai i permessi per questa operazione.';
+    // NON redirezionare se sei nel login
+    if (!isLoginRequest) {
       window.location.replace(
         `${ERROR_PAGE}?code=${code}&message=${encodeURIComponent(message)}`
       );
-      return Promise.reject({ code, message });
     }
 
-    // altri errori HTTP ≥400
-    if (res.status >= 400) {
-      let payload, code, message;
-      try {
-        payload = await res.clone().json();
-        code    = payload.code    || res.status;
-        message = payload.message || res.statusText;
-      } catch {
-        code    = res.status;
-        message = res.statusText;
-      }
-      window.location.replace(
-        `${ERROR_PAGE}?code=${code}&message=${encodeURIComponent(message)}`
-      );
-      return Promise.reject({ code, message });
-    }
+    return Promise.reject({ code, message });
+  }
 
-    // OK
-    return res;
-  };
+  return res;
+};
 })();

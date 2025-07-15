@@ -20,7 +20,7 @@
   let month = today.getMonth() + 1; // 1–12
 
   // Popola anni e setta correnti
-  for (let y = year - 4; y <= year + 6; y++) {
+  for (let y = 1900; y <= 2100; y++) {
     yearSelect.add(new Option(y, y));
   }
   monthSelect.value = month;

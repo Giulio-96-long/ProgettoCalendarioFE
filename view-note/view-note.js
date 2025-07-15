@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return res.json();
     })
     .then(n => {
-      isOwner = n.ownerId === currentUserId;
+      isOwner = Number(n.ownerId) === Number(currentUserId);
 
       titleIn.value = n.title || '';
       descIn.value = n.description || '';
@@ -228,14 +228,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
 
+      isOwner = n.owner === true;
+
+      const toList = Array.isArray(n.sharedTo) ? n.sharedTo : [];
+      const byList = Array.isArray(n.sharedBy) ? n.sharedBy : [];
+
+      sharedUsers = isOwner ? toList : byList;
+
       if (isOwner) {
-        sharedUsers = n.sharedTo || [];
         shareSearchGroup.classList.remove('d-none');
         sharedLabel.textContent = 'Condiviso con:';
       } else {
-        sharedUsers = n.sharedBy || [];
         shareSearchGroup.classList.add('d-none');
         sharedLabel.textContent = 'Condiviso da:';
+        document.getElementById('noShareNotice')?.classList.remove('d-none');
       }
       renderSharedList();
       setEditMode(false);
