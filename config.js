@@ -1,6 +1,9 @@
-const BASE_URL    = 'http://localhost:8080';          
+const BASE_URL = window.location.hostname.includes('localhost')
+  ? 'http://localhost:8080'
+  : 'https://calendar-production.up.railway.app';
+
 const LOGIN_URL   = `${BASE_URL}/login/index.html`;
-const ERROR_PAGE  = `../error/error.html`;
+const ERROR_PAGE  = `../error/error.html`;        
 
 const PUBLIC_PATHS = [
   '/login',
