@@ -1,6 +1,6 @@
 const BASE_URL = window.location.hostname.includes('localhost')
   ? 'http://localhost:8080'
-  : 'https://calendar-production.up.railway.app';
+  : 'https://progettocalendariobe-production.up.railway.app';
 
 const LOGIN_URL   = `${BASE_URL}/login/index.html`;
 const ERROR_PAGE  = `../error/error.html`;        
@@ -39,7 +39,9 @@ const token = localStorage.getItem('jwtToken');
     return Promise.reject(err);
   }
 
-  const isLoginRequest = typeof input === 'string' && input.includes('/auth/login');
+  const isLoginRequest =
+    (typeof input === 'string' && input.includes('/auth/login')) ||
+    (typeof input === 'object' && input.url && input.url.includes('/auth/login'));
 
   if ((res.status === 401 || res.status === 403) && !isLoginRequest) {
     const code    = res.status === 401 ? 'UNAUTHENTICATED' : 'FORBIDDEN';
