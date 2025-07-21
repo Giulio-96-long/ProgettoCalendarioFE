@@ -1,6 +1,4 @@
-const BASE_URL = window.location.hostname.includes('localhost')
-  ? 'http://localhost:8080'
-  : 'https://progettocalendariobe-production.up.railway.app';
+const BASE_URL = 'http://localhost:8080';
 
 const LOGIN_URL   = `${BASE_URL}/login/index.html`;
 const ERROR_PAGE  = `../error/error.html`;        
@@ -27,54 +25,53 @@ const token = localStorage.getItem('jwtToken');
 ;(function() {
   const _fetch = window.fetch.bind(window);
 
- window.fetch = async function(input, init = {}) {
-  let res;
-  try {
-    res = await _fetch(input, init);
-  } catch (err) {
-    console.error('Fetch error:', err);
-    window.location.replace(
-      `${ERROR_PAGE}?code=NETWORK_ERROR&message=${encodeURIComponent('Errore di rete.')}`
-    );
-    return Promise.reject(err);
-  }
-
-  const isLoginRequest =
-    (typeof input === 'string' && input.includes('/auth/login')) ||
-    (typeof input === 'object' && input.url && input.url.includes('/auth/login'));
-
-  if ((res.status === 401 || res.status === 403) && !isLoginRequest) {
-    const code    = res.status === 401 ? 'UNAUTHENTICATED' : 'FORBIDDEN';
-    const message = res.status === 401
-      ? 'Sessione scaduta. Effettua nuovamente il login.'
-      : 'Non hai i permessi per questa operazione.';
-    window.location.replace(
-      `${ERROR_PAGE}?code=${code}&message=${encodeURIComponent(message)}`
-    );
-    return Promise.reject({ code, message });
-  }
-
-  if (res.status >= 400) {
-    let payload, code, message;
+  window.fetch = async function(input, init = {}) {
+    let res;
     try {
-      payload = await res.clone().json();
-      code    = payload.code    || res.status;
-      message = payload.message || res.statusText;
-    } catch {
-      code    = res.status;
-      message = res.statusText;
+      res = await _fetch(input, init);
+    } catch (err) {
+      console.error('Fetch error:', err);
+      window.location.replace(
+        `${ERROR_PAGE}?code=NETWORK_ERROR&message=${encodeURIComponent('Errore di rete.')}`
+      );
+      return Promise.reject(err);
     }
 
-    // NON redirezionare se sei nel login
-    if (!isLoginRequest) {
+    const isAuthRequest =
+      (typeof input === 'string' && (input.includes('/auth/login') || input.includes('/auth/register'))) ||
+      (typeof input === 'object' && input.url && (input.url.includes('/auth/login') || input.url.includes('/auth/register')));
+
+    if ((res.status === 401 || res.status === 403) && !isAuthRequest) {
+      const code = res.status === 401 ? 'UNAUTHENTICATED' : 'FORBIDDEN';
+      const message = res.status === 401
+        ? 'Sessione scaduta. Effettua nuovamente il login.'
+        : 'Non hai i permessi per questa operazione.';
       window.location.replace(
         `${ERROR_PAGE}?code=${code}&message=${encodeURIComponent(message)}`
       );
+      return Promise.reject({ code, message });
     }
 
-    return Promise.reject({ code, message });
-  }
+    if (res.status >= 400) {
+      let payload, code, message;
+      try {
+        payload = await res.clone().json();
+        code = payload.code || res.status;
+        message = payload.message || res.statusText;
+      } catch {
+        code = res.status;
+        message = res.statusText;
+      }
 
-  return res;
-};
+      if (!isAuthRequest) {
+        window.location.replace(
+          `${ERROR_PAGE}?code=${code}&message=${encodeURIComponent(message)}`
+        );
+      }
+
+      return Promise.reject({ code, message });
+    }
+
+    return res;
+  };
 })();

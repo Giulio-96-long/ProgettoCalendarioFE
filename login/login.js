@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Se arrivo da OAuth2 con ?token=…
   const params = new URLSearchParams(window.location.search);
-  const token  = params.get('token');
+  const token = params.get('token');
   if (token) {
-    localStorage.setItem('jwtToken', token);    
+    localStorage.setItem('jwtToken', token);
     history.replaceState({}, document.title, window.location.pathname);
     window.location.href = '../calendar/calendar.html';
   }
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
       event.preventDefault();
       const username = document.getElementById('username').value.trim();
       const lastname = document.getElementById('lastname').value.trim();
-      const email    = document.getElementById('email').value.trim();
+      const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
       if (!username || !lastname || !email || !password) {
         alert('Tutti i campi sono obbligatori.');
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (loginForm) {
     loginForm.addEventListener('submit', event => {
       event.preventDefault();
-      const loginEmail    = document.getElementById('loginEmail').value.trim();
+      const loginEmail = document.getElementById('loginEmail').value.trim();
       const loginPassword = document.getElementById('loginPassword').value;
       if (!loginEmail || !loginPassword) {
         alert('Email e password sono obbligatorie.');
@@ -59,19 +59,24 @@ function registerUser(username, email, password, lastname) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, email, password, lastname })
   })
-  .then(res => {
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return res.json();
-  })
-  .then(() => {
-    alert('Registrazione riuscita – effettua ora il login');
-    // passa alla tab Login
+  .then(res => res.json()) // solo se status 200
+  .then(data => {
+    alert(data.message || 'Registrazione riuscita');
     document.querySelector('#login-tab').click();
   })
-  .catch(() => {
-    alert('Registrazione fallita. Riprova più tardi.');
+  .catch(err => {
+    if (err.code === 409 || err.message === 'Email già esistente') {
+      alert('Email già registrata');
+    } else if (err.code === 400 || err.message === 'Dati di registrazione non validi') {
+      alert('Dati non validi');
+    } else {
+      alert('Registrazione fallita. Riprova più tardi.');
+      console.error(err);
+    }
   });
 }
+
+
 
 function loginUser(email, password) {
   fetch(`${BASE_URL}/api/auth/login`, {
@@ -79,15 +84,15 @@ function loginUser(email, password) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password })
   })
-  .then(res => {
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return res.json();
-  })
-  .then(data => {
-    localStorage.setItem('jwtToken', data.token);
-    window.location.href = '../calendar/calendar.html';
-  })
-  .catch(() => {
-    alert('Login fallito. Controlla le credenziali.');
-  });
+    .then(res => {
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.json();
+    })
+    .then(data => {
+      localStorage.setItem('jwtToken', data.token);
+      window.location.href = '../calendar/calendar.html';
+    })
+    .catch(() => {
+      alert('Login fallito. Controlla le credenziali.');
+    });
 }
