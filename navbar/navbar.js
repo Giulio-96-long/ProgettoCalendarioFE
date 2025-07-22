@@ -22,8 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const leftUl = document.getElementById('nav-left');
   const rightUl = document.getElementById('nav-right');
-
-  // Carica il profilo utente
+ 
   // Carica il profilo utente
   fetch(`${BASE_URL}/api/user/profile`, {
     headers: { 'Authorization': `Bearer ${token}` }
@@ -83,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
         leftUl.appendChild(li);
       });
 
-      // Se ADMIN, aggiungi Dashboard Errori
+      // Se ADMIN, aggiungo Dashboard Errori
       if (isAdmin) {
         const li = document.createElement('li');
         li.className = 'nav-item me-3';

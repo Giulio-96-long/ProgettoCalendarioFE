@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setInterval(loadUserUnreadCount, 30000);
 
-  // bind form submit
   form.addEventListener('submit', async e => {
     e.preventDefault();
     respDiv.textContent = 'Invio in corso…';
@@ -47,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // load unread badge
+  // carico badge
   async function loadUserUnreadCount() {
     try {
       const res = await fetch(`${BASE_URL}/api/feedback/user/unread/count`, {
@@ -59,10 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
         badge.textContent = count > 0 ? count : '';
         badge.style.display = count > 0 ? 'inline-block' : 'none';
       }
-    } catch { /* ignore */ }
+    } catch {  }
   }
 
-  // load list
+  // carico la lista
   async function loadUserList() {
     tableBody.innerHTML = `<tr><td colspan="5" class="text-center py-4">
       <div class="spinner-border text-primary" role="status">
@@ -111,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // show detail
+  // dettaglio
   function viewDetail(id) {
     modalBody.innerHTML = `<div class="text-center py-4">
       <div class="spinner-border text-primary" role="status">

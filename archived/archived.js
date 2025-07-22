@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
 
-  // genero la tabella, con data-idnota
+  // genero la tabella
   tableBody.innerHTML = rows.map(function(r) {
     return `
       <tr>

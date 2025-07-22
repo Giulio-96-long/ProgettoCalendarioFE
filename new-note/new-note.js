@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  // --- RICERCA UTENTI (popola sharedUsers) ---
+  // RICERCA UTENTI 
   function doSearch(q) {
     if (!q) {
       shareSearchResults.innerHTML = '';
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   shareSearch.addEventListener('input', debounce(e => doSearch(e.target.value), 300));
 
-  // --- RENDER DELLA LISTA DEGLI UTENTI SELEZIONATI ---
+  // RENDER DELLA LISTA DEGLI UTENTI SELEZIONATI 
   function renderSharedList() {
     currentSharedList.innerHTML = sharedUsers.map(u => `
       <li class="list-group-item d-flex justify-content-between align-items-center"

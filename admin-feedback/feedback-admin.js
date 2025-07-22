@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(r => {
       if (!r.ok) throw new Error('Impossibile marcare come letto');
-      // 3) Ricarica badge e lista
+      // Ricarica badge e lista
       loadAdminUnreadCount();
       loadAdminReplyCount();
       loadAdminList();

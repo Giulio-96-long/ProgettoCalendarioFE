@@ -8,13 +8,6 @@ Frontend statico realizzato con **HTML**, **CSS** e **JavaScript vanilla**. Comu
 
 La comunicazione avviene tramite `fetch()` usando l'URL `BASE_URL` definito nel file `config.js`.
 
-Esempio:
-```js
-const BASE_URL = window.location.hostname.includes('localhost')
-  ? 'http://localhost:8080'
-  : 'https://<nome-del-backend>.azurewebsites.net';
-```
-
 Ogni richiesta privata include il token JWT:
 ```js
 headers: {

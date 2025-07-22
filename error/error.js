@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const params     = new URLSearchParams(window.location.search);
   const code       = params.get('code')    || 'ERRORE';
   const message    = params.get('message') || 'Si è verificato un errore imprevisto.';
-  const stack      = params.get('stack'); // se vuoi mostrarlo
+  const stack      = params.get('stack');
 
   document.getElementById('errorCode').innerText    = code;
   document.getElementById('errorMessage').innerText = message;

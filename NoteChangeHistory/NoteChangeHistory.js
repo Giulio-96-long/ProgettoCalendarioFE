@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   resetBtn.addEventListener('click', () => {
-    // 1) Ripristina campi ai valori di default
+    // Ripristino i campi ai valori di default
     document.getElementById('changeType').value = '';
     document.getElementById('modifiedBy').value = '';
     document.getElementById('startDate').value = '';
@@ -22,10 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('order').value = 'asc';
     document.getElementById('pageSize').value = '10';
 
-    // 2) Torna alla prima pagina
+    // Torna alla prima pagina
     currentPage = 0;
 
-    // 3) Ricarica i dati
+    //  Ricarica i dati
     fetchData();
   });
 
